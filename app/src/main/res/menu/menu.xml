@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/link"
-        android:icon="@drawable/play"
         android:title="App"
-        app:showAsAction="always">
+        app:showAsAction="never">
     </item>
 </menu>

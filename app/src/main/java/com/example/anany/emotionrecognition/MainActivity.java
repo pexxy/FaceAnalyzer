@@ -12,20 +12,14 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.graphics.Matrix;
 import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.Looper;
 import android.provider.MediaStore;
-import android.support.annotation.Nullable;
 import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.widget.CircularProgressDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -34,25 +28,17 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.microsoft.projectoxford.face.FaceServiceClient;
 import com.microsoft.projectoxford.face.FaceServiceRestClient;
-import com.microsoft.projectoxford.face.contract.Emotion;
 import com.microsoft.projectoxford.face.contract.Face;
-import com.microsoft.projectoxford.face.contract.IdentifyResult;
-import com.microsoft.projectoxford.face.rest.ClientException;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -64,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
     Boolean ready = false;
     CoordinatorLayout rel;
     int counter = 0;
+    final int[] br = {1};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
         //IMPORTANT!!------------------------------------------------------------------------------
         //Replace the below tags <> with your own endpoint and API Subscription Key.
         //For help with this, read the project's README file.
-        faceServiceClient = new FaceServiceRestClient("<YOUR ENDPOINT HERE>", "<YOUR API SUBSCRIPTION KEY>");
+        faceServiceClient = new FaceServiceRestClient("https://westeurope.api.cognitive.microsoft.com/face/v1.0", "16156b37ad0a4ad4b34276b859181012");
 
         takePicture = findViewById(R.id.takePic);
         imageView = findViewById(R.id.imageView);
@@ -122,11 +109,11 @@ public class MainActivity extends AppCompatActivity {
                 if (ready) {
                     detectandFrame(mBitmap);
                 } else {
-                    makeToast("Please take a picture.");
+                    makeToast("Uslikajte svoju reakciju");
                 }
             }
         });
-        rel = findViewById(R.id.rel);
+      /*  rel = findViewById(R.id.rel);
         final Snackbar snackBar = Snackbar.make(rel, "This is an old version of the app. The new version is available on the Play Store.", 10500);
         TextView tv = (TextView) snackBar.getView().findViewById(android.support.design.R.id.snackbar_text);
         tv.setMaxLines(4);
@@ -141,6 +128,8 @@ public class MainActivity extends AppCompatActivity {
         });
         snackBar.setActionTextColor(Color.parseColor("#a1e6ff"));
         snackBar.show();
+
+       */
     }
 
     Uri imageUri;
@@ -150,7 +139,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 100) { //High Quality picture using URI and storage
             if (resultCode == RESULT_OK) {
-                imageView.setVisibility(View.VISIBLE);
+              //  imageView.setVisibility(View.VISIBLE);
                 try {
                     mBitmap = MediaStore.Images.Media.getBitmap(
                             getContentResolver(), imageUri);
@@ -188,17 +177,39 @@ public class MainActivity extends AppCompatActivity {
                     imageView.setImageBitmap(mBitmap);
                 }
                 ready = true;
-                hidden.setVisibility(View.INVISIBLE);
+             //   hidden.setVisibility(View.INVISIBLE);
             }
         }else if(requestCode == 1 && resultCode == RESULT_OK){
             //Low Quality image
-            imageView.setVisibility(View.VISIBLE);
+          //  imageView.setVisibility(View.VISIBLE);
             mBitmap = (Bitmap) data.getExtras().get("data");
             imageView.setImageBitmap(mBitmap);
             ready = true;
-            hidden.setVisibility(View.INVISIBLE);
+
+          //  hidden.setVisibility(View.INVISIBLE);
         }
+
+        findViewById(R.id.nextPic).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                br[0]++;
+                switch (br[0]){
+                    case 2: hidden.setImageResource(R.drawable.p2);
+                        break;
+                    case 3: hidden.setImageResource(R.drawable.p3);
+                        break;
+                    case 4: hidden.setImageResource(R.drawable.p4);
+                        break;
+                    case 5: hidden.setImageResource(R.drawable.p5);
+                        break;
+                    case 6: hidden.setImageResource(R.drawable.p6);
+                        break;
+                    default: finish();
+                }
+            }
+        });
     }
+
 
     public String getRealPathFromURI(Uri uri) {
         Cursor cursor = getContentResolver().query(uri, null, null, null, null);
@@ -240,7 +251,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             protected Face[] doInBackground(InputStream... inputStreams) {
 
-                publishProgress("Detecting...");
+                publishProgress("Prepoznavanje emocije...");
                 //This is where you specify the FaceAttributes to detect. You can change this for your own use.
                 FaceServiceClient.FaceAttributeType[] faceAttr = new FaceServiceClient.FaceAttributeType[]{
                         FaceServiceClient.FaceAttributeType.HeadPose,
@@ -257,13 +268,13 @@ public class MainActivity extends AppCompatActivity {
                             faceAttr);
 
                     if (result == null) {
-                        publishProgress("Detection failed. Nothing detected.");
+                        publishProgress("Slikajte se opet");
                     }
 
-                    publishProgress(String.format("Detection Finished. %d face(s) detected", result.length));
+                    publishProgress(String.format("Detekcija uspesna. %d lica prepoznato", result.length));
                     return result;
                 } catch (Exception e) {
-                    publishProgress("Detection Failed: " + e.getMessage());
+                    publishProgress("Detekcija nije uspela " + e.getMessage());
                     return null;
                 }
             }
@@ -285,7 +296,7 @@ public class MainActivity extends AppCompatActivity {
                 Gson gson = new Gson();
                 String data = gson.toJson(faces);
                 if (faces == null || faces.length == 0) {
-                    makeToast("No faces detected. You may not have added the API Key or try retaking the picture.");
+                    makeToast("Nije prepoznato nijedno lice");
                 } else {
                     intent.putExtra("list_faces", data);
                     ByteArrayOutputStream stream = new ByteArrayOutputStream();

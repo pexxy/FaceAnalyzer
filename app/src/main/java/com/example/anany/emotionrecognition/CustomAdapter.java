@@ -8,22 +8,17 @@ package com.example.anany.emotionrecognition;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.microsoft.projectoxford.face.contract.Face;
 import com.microsoft.projectoxford.face.contract.FaceRectangle;
 
-import java.io.ByteArrayOutputStream;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -70,31 +65,35 @@ public class CustomAdapter extends BaseAdapter {
 
         age = view.findViewById(R.id.textAge);
         gender = view.findViewById(R.id.textGender);
-        facialhair = view.findViewById(R.id.textFacialHair);
-        headpose = view.findViewById(R.id.textHeadPose);
+     //   facialhair = view.findViewById(R.id.textFacialHair);
+     //   headpose = view.findViewById(R.id.textHeadPose);
         smile = view.findViewById(R.id.textSmile);
 
         imageView = view.findViewById(R.id.imgThumb);
 
-        age.setText("Age: " + faces[position].faceAttributes.age);
-        gender.setText("Gender: " + faces[position].faceAttributes.gender);
-        facialhair.setText(String.format("Facial Hair(m,b,s): %f %f \n%f", faces[position].faceAttributes.facialHair.moustache,
+        age.setText("Godine: " + faces[position].faceAttributes.age);
+        gender.setText("Pol: " + faces[position].faceAttributes.gender);
+     /*   facialhair.setText(String.format("Brkovi/brada: %f %f \n%f", faces[position].faceAttributes.facialHair.moustache,
                 faces[position].faceAttributes.facialHair.beard,
                 faces[position].faceAttributes.facialHair.sideburns));
 
-        headpose.setText(String.format("Head Pose: %f %f %f", faces[position].faceAttributes.headPose.pitch,
+      */
+
+     /*   headpose.setText(String.format("Nagib glave: %f %f %f", faces[position].faceAttributes.headPose.pitch,
                 faces[position].faceAttributes.headPose.yaw,
                 faces[position].faceAttributes.headPose.roll));
 
+      */
+
 
         TreeMap<Double, String> treeMap = new TreeMap<>();
-        treeMap.put(faces[position].faceAttributes.emotion.happiness, "Happiness");
-        treeMap.put(faces[position].faceAttributes.emotion.anger, "Anger");
-        treeMap.put(faces[position].faceAttributes.emotion.disgust, "Disgust");
-        treeMap.put(faces[position].faceAttributes.emotion.sadness, "Sadness");
-        treeMap.put(faces[position].faceAttributes.emotion.neutral, "Neutral");
-        treeMap.put(faces[position].faceAttributes.emotion.surprise, "Surprise");
-        treeMap.put(faces[position].faceAttributes.emotion.fear, "Fear");
+        treeMap.put(faces[position].faceAttributes.emotion.happiness, "Sreca");
+        treeMap.put(faces[position].faceAttributes.emotion.anger, "Ljutnja");
+        treeMap.put(faces[position].faceAttributes.emotion.disgust, "Gadjenje");
+        treeMap.put(faces[position].faceAttributes.emotion.sadness, "Tuga");
+        treeMap.put(faces[position].faceAttributes.emotion.neutral, "Neutralno");
+        treeMap.put(faces[position].faceAttributes.emotion.surprise, "Iznenadjenost");
+        treeMap.put(faces[position].faceAttributes.emotion.fear, "Strah");
 
         ArrayList<Double> arrayList = new ArrayList<>();
         TreeMap<Integer, String> rank = new TreeMap<>();

@@ -28,35 +28,22 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
-                android:text="Age: " />
+                android:text="Godine: " />
 
             <TextView
                 android:id="@+id/textGender"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/textAge"
-                android:text="Gender: " />
-
-            <TextView
-                android:id="@+id/textFacialHair"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/textGender"
-                android:text="Facial Hair: " />
+                android:text="Pol: " />
 
             <TextView
                 android:id="@+id/textSmile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/textFacialHair"
-                android:text="Smile: " />
+                android:layout_below="@id/textGender"
+                android:text="Osmeh: " />
 
-            <TextView
-                android:id="@+id/textHeadPose"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/textSmile"
-                android:text="Head Pose: " />
 
         </RelativeLayout>
 

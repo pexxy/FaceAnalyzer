@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1032185022508",
+    "project_id": "face-analyzer-1e5f5",
+    "storage_bucket": "face-analyzer-1e5f5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1032185022508:android:2332064ca22b9605dd6989",
+        "android_client_info": {
+          "package_name": "com.example.anany.emotionrecognition"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1032185022508-5ncsbkd3blclc20thlasveafper4e01m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBRIGwBHPljAO3GtTHWuPnOefFV7HqLMqw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1032185022508-5ncsbkd3blclc20thlasveafper4e01m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
