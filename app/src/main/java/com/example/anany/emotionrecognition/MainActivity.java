@@ -16,12 +16,8 @@ import android.graphics.Matrix;
 import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.provider.MediaStore;
-import android.support.design.widget.CoordinatorLayout;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -29,6 +25,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.google.gson.Gson;
 import com.microsoft.projectoxford.face.FaceServiceClient;
@@ -39,6 +40,11 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+
+//import android.support.design.widget.CoordinatorLayout;
+//import android.support.v4.app.ActivityCompat;
+//import android.support.v4.content.ContextCompat;
+//import android.support.v7.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -137,9 +143,10 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 100) { //High Quality picture using URI and storage
             if (resultCode == RESULT_OK) {
-              //  imageView.setVisibility(View.VISIBLE);
+                //  imageView.setVisibility(View.VISIBLE);
                 try {
                     mBitmap = MediaStore.Images.Media.getBitmap(
                             getContentResolver(), imageUri);
@@ -177,34 +184,43 @@ public class MainActivity extends AppCompatActivity {
                     imageView.setImageBitmap(mBitmap);
                 }
                 ready = true;
-             //   hidden.setVisibility(View.INVISIBLE);
+                //   hidden.setVisibility(View.INVISIBLE);
             }
-        }else if(requestCode == 1 && resultCode == RESULT_OK){
+        } else if (requestCode == 1 && resultCode == RESULT_OK) {
             //Low Quality image
-          //  imageView.setVisibility(View.VISIBLE);
+            //  imageView.setVisibility(View.VISIBLE);
             mBitmap = (Bitmap) data.getExtras().get("data");
             imageView.setImageBitmap(mBitmap);
             ready = true;
 
-          //  hidden.setVisibility(View.INVISIBLE);
+            //  hidden.setVisibility(View.INVISIBLE);
         }
 
         findViewById(R.id.nextPic).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 br[0]++;
-                switch (br[0]){
-                    case 2: hidden.setImageResource(R.drawable.p2);
+                switch (br[0]) {
+                    case 2:
+                        hidden.setImageResource(R.drawable.p2);
                         break;
-                    case 3: hidden.setImageResource(R.drawable.p3);
+                    case 3:
+                        hidden.setImageResource(R.drawable.p3);
                         break;
-                    case 4: hidden.setImageResource(R.drawable.p4);
+                    case 4:
+                        hidden.setImageResource(R.drawable.p4);
                         break;
-                    case 5: hidden.setImageResource(R.drawable.p5);
+                    case 5:
+                        hidden.setImageResource(R.drawable.p5);
                         break;
-                    case 6: hidden.setImageResource(R.drawable.p6);
+                    case 6:
+                        hidden.setImageResource(R.drawable.p6);
                         break;
-                    default: finish();
+                    case 7:
+                        startActivity(new Intent(getApplicationContext(), TheEnd.class));
+                        finish();
+                    default:
+                        finish();
                 }
             }
         });

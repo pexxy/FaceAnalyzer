@@ -5,15 +5,18 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class PocetnaAdmin extends AppCompatActivity {
+import com.google.firebase.auth.FirebaseAuth;
 
+public class TheEnd extends AppCompatActivity {
+    FirebaseAuth fAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pocetna_admin);
+        setContentView(R.layout.activity_the_end);
+        fAuth = FirebaseAuth.getInstance();
     }
 
-    public void analyze(View view) {
-        //startActivity(new Intent(this, Analyze.class));
+    public void Logout(View view) {
+        fAuth.signOut();
     }
 }

@@ -12,26 +12,28 @@
         android:roundIcon="@drawable/emotions"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.example.anany.emotionrecognition.PocetnaAdmin" />
-        <activity android:name="com.example.anany.emotionrecognition.LoginAdmin" />
-        <activity android:name="com.example.anany.emotionrecognition.LoginUser" />
-        <activity android:name="com.example.anany.emotionrecognition.PocetnaUser" />
-        <activity android:name="com.example.anany.emotionrecognition.Registracija" />
-        <activity android:name="com.example.anany.emotionrecognition.Prijava" />
-        <activity android:name="com.example.anany.emotionrecognition.MainActivity" />
+        <activity android:name=".Analyze"></activity>
+        <activity android:name=".TheEnd" />
+        <activity android:name=".PocetnaAdmin" />
+        <activity android:name=".LoginAdmin" />
+        <activity android:name=".LoginUser" />
+        <activity android:name=".PocetnaUser" />
+        <activity android:name=".Registracija" />
+        <activity android:name=".Prijava" />
+        <activity android:name=".MainActivity" />
 
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false" />
 
-        <activity android:name="com.example.anany.emotionrecognition.SplashScreen">
+        <activity android:name=".SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.example.anany.emotionrecognition.ResultActivity" />
+        <activity android:name=".ResultActivity" />
     </application>
 
 </manifest>

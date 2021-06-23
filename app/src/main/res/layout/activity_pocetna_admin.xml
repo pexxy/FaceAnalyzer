@@ -25,7 +25,8 @@
         style="@style/Widget.AppCompat.Button"
         android:layout_width="309dp"
         android:layout_height="49dp"
-        android:text="Analiza tačnosti"
+        android:text="Analiza "
+        android:onClick="analyze"
         android:textColor="@color/tamna"
         app:backgroundTint="@color/dugme_svetlije"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -33,20 +34,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.394" />
-
-    <Button
-        android:id="@+id/btnUspesnost"
-        style="@style/Widget.AppCompat.Button"
-        android:layout_width="309dp"
-        android:layout_height="49dp"
-        android:text="Analiza uspešnosti"
-        android:textColor="@color/white"
-        app:backgroundTint="@color/dugme_tamnije"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnTacnost"
-        app:layout_constraintVertical_bias="0.233" />
 
     <TextView
         android:id="@+id/textView12"
